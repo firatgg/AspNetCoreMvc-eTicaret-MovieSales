@@ -71,7 +71,7 @@ Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için `LICEN
 ## İletişim
 
 Herhangi bir sorunuz veya geri bildiriminiz için lütfen bizimle iletişime geçin:
-- E-posta: [email@example.com](mailto:email@example.com)
-- GitHub: [username](https://github.com/username)
+- E-posta: [euphratesgultekin@gmail.com](mailto:euphratesgultekin@gmail.com)
+- GitHub: [firatgg](https://github.com/firatgg)
 
 Teşekkürler ve iyi alışverişler!
