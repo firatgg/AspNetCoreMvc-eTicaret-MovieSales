@@ -23,6 +23,7 @@ namespace AspNetCoreMvc_eTicaret_MovieSales
 
             builder.Services.AddScoped<IGenreRepository, GenreRepository>();
             builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

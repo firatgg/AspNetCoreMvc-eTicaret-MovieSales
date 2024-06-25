@@ -20,6 +20,7 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
         {
             sepet = SepetAl();
             TempData["ToplamAdet"] = siparis.ToplamAdet(sepet);
+            
             TempData["ToplamTutar"] = siparis.ToplamTutar(sepet);
 
             return View(sepet);
@@ -40,7 +41,20 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult SepetSil()
+        {
+            //HttpContext.Session.Clear(); //Oturumda bulunan tüm sessionları siler.
+            HttpContext.Session.Remove("sepet"); //Sadece ismi belirtiler sessionı siler.
+            return RedirectToAction("Index");
+        }
 
+        public IActionResult Sil(int id)
+        {
+            sepet = SepetAl();
+            sepet =siparis.SepettenSil(sepet, id);
+            SepetKaydet(sepet);
+            return RedirectToAction("Index");
+        }
         public List<SepetDetay> SepetAl() 
         
         {

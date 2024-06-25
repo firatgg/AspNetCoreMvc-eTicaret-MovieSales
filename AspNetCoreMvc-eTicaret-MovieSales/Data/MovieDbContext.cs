@@ -1,5 +1,6 @@
 ﻿using AspNetCoreMvc_eTicaret_MovieSales.Models;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreMvc_eTicaret_MovieSales.ViewModels;
 
 namespace AspNetCoreMvc_eTicaret_MovieSales.Data
 {
@@ -79,5 +80,6 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Data
 
 
         }
+        public DbSet<AspNetCoreMvc_eTicaret_MovieSales.ViewModels.CustomerViewModel> CustomerViewModel { get; set; } = default!;
     }
 }

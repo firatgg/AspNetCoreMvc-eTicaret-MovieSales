@@ -1,9 +1,10 @@
 ﻿using AspNetCoreMvc_eTicaret_MovieSales.Data;
+using AspNetCoreMvc_eTicaret_MovieSales.Interfaces;
 using AspNetCoreMvc_eTicaret_MovieSales.Models;
 
 namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly MovieDbContext _context;
         public CustomerRepository(MovieDbContext context)

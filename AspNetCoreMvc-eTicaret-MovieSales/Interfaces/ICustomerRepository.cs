@@ -1,8 +1,9 @@
 ﻿using AspNetCoreMvc_eTicaret_MovieSales.Models;
+using AspNetCoreMvc_eTicaret_MovieSales.Repositories;
 
 namespace AspNetCoreMvc_eTicaret_MovieSales.Interfaces
 {
-    public interface ICustomerReporsitory
+    public interface ICustomerRepository 
     {
         public List<Customer> GetAll();
         public Customer Get(int id);
