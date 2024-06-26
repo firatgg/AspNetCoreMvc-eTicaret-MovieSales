@@ -11,6 +11,9 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Mapping
             CreateMap<Genre, GenreViewModel>().ReverseMap();
             CreateMap<Customer, CustomerViewModel>().ReverseMap();
             CreateMap<Movie, MovieViewModel>().ReverseMap();
+            CreateMap<MovieSale, MovieSaleViewModel>().ReverseMap();
+            CreateMap<MovieSaleDetail, MovieSaleDetailViewModel>().ReverseMap();
+
         }
 
     }

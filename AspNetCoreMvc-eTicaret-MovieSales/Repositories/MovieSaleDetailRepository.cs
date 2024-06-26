@@ -1,9 +1,10 @@
 ﻿using AspNetCoreMvc_eTicaret_MovieSales.Data;
+using AspNetCoreMvc_eTicaret_MovieSales.Interfaces;
 using AspNetCoreMvc_eTicaret_MovieSales.Models;
 
 namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
 {
-    public class MovieSaleDetailRepository
+    public class MovieSaleDetailRepository : IMovieSaleDetailRepository
     {
         private readonly MovieDbContext _context;
         public MovieSaleDetailRepository(MovieDbContext context)
@@ -21,6 +22,35 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
             _context.MovieSaleDetails.Remove(movieSaleDetail);
             _context.SaveChanges();
         }
+
+        public bool AddRange(List<SepetDetay> sepet, int movieSaleId)
+        {
+            foreach (var item in sepet)
+            {
+                MovieSaleDetail newDetail = new MovieSaleDetail()
+                {
+                    MovieSaleId = movieSaleId,
+                    MovieId = item.MovieId,
+                    Number = item.MovieQuantity,
+                    UnitPrice = item.MoviePrice
+                };
+                _context.MovieSaleDetails.Add(newDetail); //arakatmana ekler.
+            }
+            try
+            {
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+                throw;
+            }
+            return false;
+        }
+
+
 
         public void Delete(int id)
         {
@@ -45,5 +75,7 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
             _context.SaveChanges();
 
         }
+
+       
     }
 }

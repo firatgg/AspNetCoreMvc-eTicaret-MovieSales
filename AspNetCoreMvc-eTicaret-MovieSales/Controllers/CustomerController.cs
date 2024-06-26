@@ -11,11 +11,15 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
     {
 
         private readonly ICustomerRepository _customerRepo;
+        private readonly IMovieSaleRepository _movieSaleRepository;
+        private readonly IMovieSaleDetailRepository _movieDetailSaleRepository;
+
         private readonly IMapper _mapper;
-        public CustomerController(ICustomerRepository customerRepo, IMapper mapper)
+        public CustomerController(ICustomerRepository customerRepo, IMapper mapper, IMovieSaleRepository movieSaleRepository)
         {
             _customerRepo = customerRepo;
             _mapper = mapper;
+            _movieSaleRepository = movieSaleRepository;
         }
 
         public IActionResult Index()
@@ -63,7 +67,9 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
         public IActionResult ConfirmAddress(CustomerViewModel model)
         {
             _customerRepo.Update(_mapper.Map<Customer>(model));
+            HttpContext.Session.SetJson("user", model);
             return RedirectToAction("ConfirmPayment");
+
         }
 
 
@@ -102,7 +108,21 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
         [HttpPost]
         public IActionResult ConfirmPayment(CustomerFaturaViewModel model)
         {
-            return View();
+            var satisId = _movieSaleRepository.AddSale(_mapper.Map<MovieSale>(model.satisViewModel));
+
+            var sepet = HttpContext.Session.GetJson<List<SepetDetay>>("sepet");
+
+            if(_movieDetailSaleRepository.AddRange(sepet, satisId))
+            {
+                TempData["mesaj"] = "Satış işlemi başarıyla gerçekleşti.";
+                HttpContext.Session.Remove("sepet"); // sepet bilgileri session'dan silinir.ancak müşteri isterse yeniden alışverişe devam edebilir.
+            }
+            else
+            {
+                TempData["mesaj"] = "Satış işlemi gerçekleşmedi, bilgilerinizi kontol edin !";
+
+            }
+            return View("MessageShow");
         }
 
         public IActionResult Create() 

@@ -17,7 +17,7 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
             _context.SaveChanges();
         }
 
-        public int AddSales(MovieSale movieSale)
+        public int AddSale(MovieSale movieSale)
         {
             _context.MovieSales.Add(movieSale);
             _context.SaveChanges();

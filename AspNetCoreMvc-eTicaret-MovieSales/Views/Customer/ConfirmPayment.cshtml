@@ -5,9 +5,20 @@
 }
 
 <h3>Ödeme Onay Sayfası</h3>
+@if (TempData["mesaj"] != null)
+{
+    <alert class="alert alert-danger mt-2"> 
+        @TempData["mesaj"]
+    </alert>
+}
 
 <div class="container">
     <form asp-action="ConfirmPayment" asp-controller="Customer" method="post">
+        <input type="hidden" asp-for="@Model.customerViewModel.Id" />
+        <input type="hidden" asp-for="@Model.satisViewModel.CustomerId" />
+        <input type="hidden" asp-for="@Model.satisViewModel.Date" />
+        <input type="hidden" asp-for="@Model.satisViewModel.TotalQuantity" />
+        <input type="hidden" asp-for="@Model.satisViewModel.TotalPrice" />
         <div class="row">
             <div class="col-md-6">
                 <h3>Müşteri Bilgileri</h3>
